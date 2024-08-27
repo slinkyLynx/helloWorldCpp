@@ -10,13 +10,17 @@ void error_callback(int error, const char* description) {
 	fprintf(stderr, "Error: %s\n", description);
 }
 
+void window_close_callback(GLFWwindow* window) {
+	std::cout << "Closing window!" << std::endl;
+}
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	std::cout << "key = " << key
 			  << ", scancode = " << scancode
 			  << ", action = " << action
 			  << ", mods = " << mods
 			  << std::endl;
-			  
+	
 	if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action) {
 		std::cout << "Closing window!" << std::endl;
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -41,6 +45,7 @@ int main() {
 		exit(EXIT_FAILURE);
 	}
 	
+	glfwSetWindowCloseCallback(window, window_close_callback);
 	glfwSetKeyCallback(window, key_callback);
 	
 	glfwMakeContextCurrent(window);
