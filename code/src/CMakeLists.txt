@@ -6,13 +6,18 @@ add_executable(${EXECUTABLE_NAME}
 	main.cpp
 )
 
-# Move ball.*pp to a physObj library
+target_compile_features(${EXECUTABLE_NAME} PRIVATE cxx_std_17)
 
-target_sources(${EXECUTABLE_NAME}
-	PUBLIC
-	ball.cpp
+add_subdirectory(physObj)
+
+target_link_libraries(${EXECUTABLE_NAME}
 	PRIVATE
-	ball.hpp
+	physObj
+	glm::glm
 )
 
-target_link_libraries(${EXECUTABLE_NAME} PRIVATE glm::glm)
+target_include_directories(${EXECUTABLE_NAME}
+	PRIVATE
+	"${PROJECT_BINARY_DIR}"
+	"${PROJECT_SOURCE_DIR}/physObj"
+)

@@ -15,4 +15,5 @@ public:
 
 private:
 	glm::vec3 mPos;
+	glm::vec3 mVel{0.0f, 0.0f, 0.0f};
 };
