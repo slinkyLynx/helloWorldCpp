@@ -2,18 +2,64 @@
 
 #include <iostream>
 
+#include <GLFW/glfw3.h>
+
 #include <glm/glm.hpp>
 
+void error_callback(int error, const char* description) {
+	fprintf(stderr, "Error: %s\n", description);
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	std::cout << "key = " << key
+			  << ", scancode = " << scancode
+			  << ", action = " << action
+			  << ", mods = " << mods
+			  << std::endl;
+			  
+	if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action) {
+		std::cout << "Closing window!" << std::endl;
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+	}
+}
+
 int main() {
-	std::cout << "Hello, world!" << std::endl;
-	glm::vec3 pos{1.0f, 2.1f, 3.4f};
-	Ball b{pos};
-	std::cout << "b Position: (" << b.pos().x << ", " << b.pos().y << ", " << b.pos().z << ")" << std::endl;
-	std::cout << "b Magnitude: " << b.distanceFromPoint(glm::vec3{}) << std::endl;
-	Ball c{b};
-	c.moveToUnitVec();
-	std::cout << "c Position: (" << c.pos().x << ", " << c.pos().y << ", " << c.pos().z << ")" << std::endl;
-	std::cout << "c Magnitude: " << c.distanceFromPoint(glm::vec3{}) << std::endl;
-	std::cout << "Distance between b and c: " << b.distanceFromPoint(c.pos()) << std::endl;
-	return 0;
+	glfwSetErrorCallback(error_callback);
+	
+	if (!glfwInit()) {
+		exit(EXIT_FAILURE);
+	}
+	
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	
+	GLFWwindow* window = glfwCreateWindow(800, 600, "GLFW test window", nullptr, nullptr);
+	
+	if (!window) {
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+	
+	glfwSetKeyCallback(window, key_callback);
+	
+	glfwMakeContextCurrent(window);
+	glfwSwapInterval(1);
+	
+	while (!glfwWindowShouldClose(window)) {
+//		int width, height;
+//		glfwGetFramebufferSize(window, &width, &height);
+//		glViewport(0, 0, width, height);
+		
+		double time = glfwGetTime();
+		std::cout << time << std::endl;
+		
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+	
+	glfwDestroyWindow(window);
+	
+	glfwTerminate();
+	exit(EXIT_SUCCESS);
 }

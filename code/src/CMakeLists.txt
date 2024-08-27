@@ -1,5 +1,6 @@
 set(EXECUTABLE_NAME helloWorldCpp)
 
+find_package(glfw3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 
 add_executable(${EXECUTABLE_NAME}
@@ -13,6 +14,7 @@ add_subdirectory(physObj)
 target_link_libraries(${EXECUTABLE_NAME}
 	PRIVATE
 	physObj
+	glfw
 	glm::glm
 )
 
