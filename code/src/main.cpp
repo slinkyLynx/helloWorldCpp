@@ -27,7 +27,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 }
 
-int main() {
+int main(int argc, char* argv[]) {
 	glfwSetErrorCallback(error_callback);
 	
 	if (!glfwInit()) {
