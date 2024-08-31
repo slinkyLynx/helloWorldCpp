@@ -93,7 +93,7 @@ int main() {
 
     std::cout << extensionCount << " extensions supported\n";
 
-    glm::mat4 matrix{};
+    glm::mat4 matrix{1.0f};
     glm::vec4 vec{0.0f, 0.0f, 0.0f, 1.0f};
     auto test = matrix * vec;
     
