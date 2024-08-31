@@ -2,6 +2,7 @@ set(EXECUTABLE_NAME helloWorldCpp)
 
 find_package(glfw3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
+find_package(Vulkan REQUIRED)
 
 add_executable(${EXECUTABLE_NAME}
 	main.cpp
@@ -16,6 +17,7 @@ target_link_libraries(${EXECUTABLE_NAME}
 	physObj
 	glfw
 	glm::glm
+	Vulkan::Vulkan
 )
 
 target_include_directories(${EXECUTABLE_NAME}

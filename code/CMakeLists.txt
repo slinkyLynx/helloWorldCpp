@@ -4,7 +4,6 @@ project(helloWorldCpp VERSION 0.0.1)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-
 set(CMAKE_CXX_FLAGS "-Werror -Wall -Wextra -O2")
 
 add_subdirectory(src)

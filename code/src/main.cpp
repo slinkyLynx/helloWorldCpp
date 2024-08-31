@@ -1,4 +1,4 @@
-#include <ball.hpp>
+/*#include <ball.hpp>
 
 #include <iostream>
 
@@ -10,7 +10,7 @@ void error_callback(int error, const char* description) {
 	std::cerr << "Error: " << error << '\n' << description << std::endl;
 }
 
-void window_close_callback(GLFWwindow* /*window*/) {
+void window_close_callback(GLFWwindow*) {
 	std::cout << "Closing window!" << std::endl;
 }
 
@@ -27,7 +27,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 }
 
-int main(int /*argc*/, char* /*argv*/[]) {
+int main() {
 	glfwSetErrorCallback(error_callback);
 	
 	if (!glfwInit()) {
@@ -39,7 +39,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 //	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	
-	GLFWwindow* window = glfwCreateWindow(800, 600, "GLFW test window", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(800, 600, "Vulkan test window", nullptr, nullptr);
 	
 	if (!window) {
 		glfwTerminate();
@@ -68,4 +68,44 @@ int main(int /*argc*/, char* /*argv*/[]) {
 	
 	glfwTerminate();
 	exit(EXIT_SUCCESS);
+}*/
+
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+
+#include <vulkan/vulkan.hpp>
+
+#include <iostream>
+
+int main() {
+    glfwInit();
+
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
+
+    uint32_t extensionCount = 0;
+    vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+
+    std::cout << extensionCount << " extensions supported\n";
+
+    glm::mat4 matrix{};
+    glm::vec4 vec{0.0f, 0.0f, 0.0f, 1.0f};
+    auto test = matrix * vec;
+    
+    std::cout << "(" << test.x << ", " << test.y << ", " << test.z << ", " << test.w << ")" << std::endl;
+
+    while(!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+    }
+
+    glfwDestroyWindow(window);
+
+    glfwTerminate();
+
+    return 0;
 }
