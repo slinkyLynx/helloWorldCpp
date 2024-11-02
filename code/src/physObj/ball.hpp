@@ -2,18 +2,18 @@
 
 class Ball {
 public:
-	Ball();
-	Ball(const float x, const float y, const float z);
-	Ball(const glm::vec3& pos);
-	Ball(const Ball& ball);
-	Ball& operator=(const Ball& rhs);
+  Ball();
+  Ball(const float x, const float y, const float z);
+  Ball(const glm::vec3 &pos);
+  Ball(const Ball &ball);
+  Ball &operator=(const Ball &rhs);
 
-	glm::vec3 pos() const;
-	
-	void moveToUnitVec();
-	float distanceFromPoint(const glm::vec3& point) const;
+  glm::vec3 pos() const;
+
+  void moveToUnitVec();
+  float distanceFromPoint(const glm::vec3 &point) const;
 
 private:
-	glm::vec3 mPos;
-	glm::vec3 mVel{0.0f, 0.0f, 0.0f};
+  glm::vec3 mPos;
+  glm::vec3 mVel{0.0f, 0.0f, 0.0f};
 };
